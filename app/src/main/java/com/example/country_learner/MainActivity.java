@@ -2,6 +2,7 @@ package com.example.country_learner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("Testing Click", "worked");
+                Intent intent = new Intent(view.getContext(), CountrySearchActivity.class);
+                view.getContext().startActivity(intent);
             }
         });
 

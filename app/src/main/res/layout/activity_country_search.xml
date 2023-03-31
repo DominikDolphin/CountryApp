@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
 
     <TextView
@@ -12,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/main_activity_menu_title"
+        android:text="@string/country_search_title"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="24sp"
@@ -32,48 +31,55 @@
         app:layout_constraintWidth_percent="0.8"
         tools:ignore="MissingConstraints" />
 
-    <Button
-        android:id="@+id/menu_button_search_country"
+    <EditText
+        android:id="@+id/search_input"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/main_activity_search_country"
-        app:layout_constraintBottom_toTopOf="@+id/menu_button_random_country"
+        android:hint="@string/country_search_input_hint"
+        android:inputType="text"
+        android:text=""
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintWidth_percent="0.5" />
+
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_weight=".1"
+        app:layout_constraintWidth_percent="0.8" />
 
     <Button
-        android:id="@+id/menu_button_random_country"
+        android:id="@+id/country_search_button_submit"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/main_activity_random_country"
-        app:layout_constraintBottom_toTopOf="@+id/menu_button_my_favourites"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_button_search_country"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintWidth_percent="0.5" />
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="76dp"
 
-    <Button
-        android:id="@+id/menu_button_my_favourites"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="70dp"
-        android:text="@string/main_activity_my_favourites"
+        android:backgroundTint="@color/button_submit"
+        android:text="@string/country_search_search_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/country_search_button_clear"
+        app:layout_constraintTop_toBottomOf="@+id/search_input"
+        app:layout_constraintVertical_bias="0.001"
+        app:layout_constraintWidth_percent="0.3" />
+
+    <Button
+        android:id="@+id/country_search_button_clear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="0dp"
+
+        android:backgroundTint="@color/button_clear"
+        android:text="@string/country_search_clear_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/country_search_button_submit"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_button_random_country"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintWidth_percent="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/search_input"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_percent="0.3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
