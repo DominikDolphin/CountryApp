@@ -2,36 +2,33 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/view_countryName"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginEnd="57dp"
-        android:layout_marginBottom="7dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="42dp"
         android:text="Official Name"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/view_commonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view_commonName"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="57dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="57dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/view_countryName"
+        android:layout_width="259dp"
+        android:layout_height="81dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="123dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/view_placeholder_languages"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view_countryName"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_launcher" />
 
@@ -39,330 +36,255 @@
         android:id="@+id/view_commonName"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="40dp"
         android:text="commonName"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/view_capitalCity"
-        app:layout_constraintEnd_toEndOf="@+id/view_capitalCity"
-        app:layout_constraintStart_toStartOf="@+id/view_countryName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/view_capitalCity"
         app:layout_constraintTop_toBottomOf="@+id/view_countryName" />
 
     <TextView
         android:id="@+id/view_capitalCity"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginEnd="55dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="38dp"
         android:text="Capital"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintBottom_toTopOf="@+id/view_languages"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_commonName" />
 
     <TextView
-        android:id="@+id/view_placeholder_languages"
+        android:id="@+id/view_placeholder_unMember"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="5dp"
-        android:text="Official Languages"
+        android:text="UN Member"
+        app:layout_constraintWidth_percent="0.6"
         android:textAlignment="viewStart"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
-        app:layout_constraintEnd_toStartOf="@+id/view_languages"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view_languages" />
-
-    <TextView
-        android:id="@+id/view_languages"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="5dp"
-        android:text="Engwish, fwench"
-        android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/view2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_placeholder_languages"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
-
-    <TextView
-        android:id="@+id/view_placeholder_continent"
-        android:layout_width="0dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="250dp"
-        android:text="Continent"
-        android:textAlignment="viewStart"
-        android:textStyle="bold"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/view3"
-        app:layout_constraintEnd_toStartOf="@+id/view_continent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/view_unMember"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_placeholder_independent" />
-
-    <TextView
-        android:id="@+id/view_placeholder_subregion"
-        android:layout_width="0dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="31dp"
-        android:text="Subregion"
-        android:textAlignment="viewStart"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view_subregion"
-        app:layout_constraintEnd_toStartOf="@+id/view_subregion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_placeholder_continent"
-        app:layout_constraintVertical_bias="0.545" />
-
-    <TextView
-        android:id="@+id/view_placeholder_population"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="31dp"
-        android:text="Population"
-        android:textAlignment="viewStart"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view_population"
-        app:layout_constraintEnd_toStartOf="@+id/view_population"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view_population"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/view_placeholder_currency"
-        android:layout_width="0dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="21dp"
-        android:text="Currency"
-        android:textAlignment="viewStart"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view_placeholder_symbol"
-        app:layout_constraintEnd_toStartOf="@+id/view_currency"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_placeholder_population"
-        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/view_placeholder_symbol"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="13dp"
         android:text="Symbol"
+        app:layout_constraintWidth_percent="0.6"
         android:textAlignment="viewStart"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view_symbol"
+        app:layout_constraintBottom_toTopOf="@+id/view_placeholder_independent"
         app:layout_constraintEnd_toStartOf="@+id/view_symbol"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_currency" />
+        app:layout_constraintTop_toBottomOf="@+id/view_placeholder_currency" />
 
     <TextView
         android:id="@+id/view_placeholder_independent"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="31dp"
         android:text="Independent"
         android:textAlignment="viewStart"
         android:textStyle="bold"
+        app:layout_constraintWidth_percent="0.6"
         app:layout_constraintBottom_toTopOf="@+id/view_placeholder_unMember"
         app:layout_constraintEnd_toStartOf="@+id/view_independent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view_independent" />
+        app:layout_constraintTop_toBottomOf="@+id/view_placeholder_symbol" />
 
     <TextView
-        android:id="@+id/view_placeholder_unMember"
+        app:layout_constraintWidth_percent="0.6"
+        android:id="@+id/view_placeholder_continent"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="31dp"
-        android:text="UN Member"
+        android:text="Continent"
         android:textAlignment="viewStart"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view_unMember"
-        app:layout_constraintEnd_toStartOf="@+id/view_unMember"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/view_placeholder_subregion"
+        app:layout_constraintEnd_toStartOf="@+id/view_continent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_independent" />
+
+        app:layout_constraintTop_toBottomOf="@+id/view_placeholder_languages" />
+
+    <TextView
+        android:id="@+id/view_placeholder_subregion"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="7dp"
+        android:text="Subregion"
+        app:layout_constraintWidth_percent="0.6"
+        android:textAlignment="viewStart"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/view_placeholder_population"
+        app:layout_constraintEnd_toStartOf="@+id/view_subregion"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_placeholder_continent" />
 
     <TextView
         android:id="@+id/view_continent"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="31dp"
+        android:layout_height="20dp"
         android:text="amuricas"
+
         android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/view_subregion"
+        app:layout_constraintBaseline_toBaselineOf="@+id/view_placeholder_continent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_placeholder_continent"
-        app:layout_constraintTop_toBottomOf="@+id/view2" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view_placeholder_continent" />
+
+    <TextView
+        android:id="@+id/view_placeholder_currency"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="1dp"
+        android:text="Currency"
+        app:layout_constraintWidth_percent="0.6"
+        android:textAlignment="viewStart"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/view_placeholder_symbol"
+        app:layout_constraintEnd_toStartOf="@+id/view_currency"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_placeholder_population" />
+
+    <TextView
+        android:id="@+id/view_placeholder_population"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="11dp"
+        android:text="Population"
+        app:layout_constraintWidth_percent="0.6"
+        android:textAlignment="viewStart"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/view_placeholder_currency"
+        app:layout_constraintEnd_toStartOf="@+id/view_population"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_placeholder_subregion" />
+
+    <TextView
+        android:id="@+id/view_languages"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:text="Engwish, fwench"
+        android:textAlignment="viewStart"
+        app:layout_constraintBaseline_toBaselineOf="@+id/view_placeholder_languages"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view_placeholder_languages" />
+
+    <TextView
+        android:id="@+id/view_placeholder_languages"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.6"
+        android:layout_marginBottom="9dp"
+        android:text="Official Languages"
+        android:textAlignment="viewStart"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/view_placeholder_continent"
+        app:layout_constraintEnd_toStartOf="@+id/view_languages"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <TextView
         android:id="@+id/view_subregion"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="12dp"
+        android:layout_height="20dp"
         android:text="nawth murica"
         android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/view3"
+        app:layout_constraintBaseline_toBaselineOf="@+id/view_placeholder_subregion"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_placeholder_subregion"
-        app:layout_constraintTop_toBottomOf="@+id/view_continent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view_placeholder_subregion" />
 
     <TextView
         android:id="@+id/view_population"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="20dp"
+        app:layout_constraintVertical_weight="1"
         android:text="12345678"
         android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/view4"
+        app:layout_constraintBaseline_toBaselineOf="@+id/view_placeholder_population"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_placeholder_population"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view_placeholder_population" />
 
     <TextView
         android:id="@+id/view_currency"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="31dp"
+        android:layout_height="20dp"
         android:text="CAD"
         android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/view_symbol"
+        app:layout_constraintBaseline_toBaselineOf="@+id/view_placeholder_currency"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_placeholder_currency"
-        app:layout_constraintTop_toBottomOf="@+id/view4" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view_placeholder_currency" />
 
     <TextView
         android:id="@+id/view_symbol"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="20dp"
         android:text="$"
+
         android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/view5"
+        app:layout_constraintBaseline_toBaselineOf="@+id/view_placeholder_symbol"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_placeholder_symbol"
-        app:layout_constraintTop_toBottomOf="@+id/view_currency" />
+        app:layout_constraintStart_toEndOf="@+id/view_placeholder_symbol" />
 
     <TextView
         android:id="@+id/view_independent"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="31dp"
+        android:layout_height="20dp"
         android:text="yup"
         android:textAlignment="viewStart"
-        app:layout_constraintBottom_toTopOf="@+id/view_unMember"
+        app:layout_constraintBaseline_toBaselineOf="@+id/view_placeholder_independent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_placeholder_independent"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/view_placeholder_independent" />
 
     <TextView
         android:id="@+id/view_unMember"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="31dp"
-        android:layout_marginBottom="163dp"
+        android:layout_height="20dp"
         android:text="yuuup"
         android:textAlignment="viewStart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_placeholder_unMember"
-        app:layout_constraintTop_toBottomOf="@+id/view_independent" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/view_placeholder_unMember"
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="12dp"
-        android:background="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/view_languages"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.002"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/view_placeholder_unMember" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="view_countryName,imageView2,view_commonName,view_capitalCity,view_placeholder_unMember,view_placeholder_symbol,view_placeholder_independent,view_placeholder_continent,view_placeholder_subregion,view_continent,view_placeholder_currency,view_placeholder_population,view_languages,view_placeholder_languages,view_subregion,view_population,view_currency,view_symbol,view_independent,view_unMember"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_capitalCity"
-        app:layout_constraintWidth_percent="0.8"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.002"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="6dp"
-        android:background="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/view_continent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="imageView2,view_capitalCity,view_commonName,view_countryName"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_languages"
-        app:layout_constraintWidth_percent="0.8"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="11dp"
-        android:background="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/view_population"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.002"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_subregion"
-        app:layout_constraintWidth_percent="0.8"
-        tools:ignore="MissingConstraints" />
-
-    <View
-        android:id="@+id/view4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.002"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="11dp"
-        android:background="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/view_currency"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_population"
-        app:layout_constraintWidth_percent="0.8"
-        tools:ignore="MissingConstraints" />
-
-    <View
-        android:id="@+id/view5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.002"
-        android:layout_marginStart="41dp"
-        android:layout_marginEnd="41dp"
-        android:layout_marginBottom="8dp"
-        android:background="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/view_independent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_symbol"
-        app:layout_constraintWidth_percent="0.8"
-        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
