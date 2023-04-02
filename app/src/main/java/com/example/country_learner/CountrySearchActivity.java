@@ -28,7 +28,6 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private ArrayList<Country> countryList;
 
 
     @Override
@@ -42,18 +41,11 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        countryList = new ArrayList<>(0);
+//        if (thisCountry == null){
+//            thisCountry = new Country();
+//
+//        }
 
-
-
-        Country test = new Country();
-        test.setOfficialName("DOMIWANASDAS");
-        countryList.add(test);
-
-
-//        adapter = new CountryAdapter(countryList, this);
-        adapter = new CountryAdapter(test, this);
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutFrozen(true);
         btnClear = findViewById(R.id.country_search_button_clear);
         btnSubmit = findViewById(R.id.country_search_button_submit);
@@ -66,7 +58,8 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
             @Override
             public void onClick(View view) {
                 Log.d("Submit button", "Clicked");
-                networkingManager.getCountry("Canada");
+
+                networkingManager.getCountry(String.valueOf(countryInput.getText()));
             }
         });
 
@@ -84,8 +77,13 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
     @Override
     public void networkingManagerCompleteWithJSonString(String jsonString) {
         //parse json string
-        thisCountry = JsonManager.fromStringToCountry(jsonString);
-        countryList.add(thisCountry);
+        JsonManager jsonManager = new JsonManager();
+        thisCountry = jsonManager.fromStringToCountry(jsonString);
+
+        //Add View to page
+        adapter = new CountryAdapter(thisCountry, this);
+        recyclerView.setAdapter(adapter);
+
 
     }
 

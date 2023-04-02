@@ -9,19 +9,50 @@ public class JsonManager {
     //Sample data: https://restcountries.com/v3.1/name/canada
     //Visualizer: https://jsonformatter.curiousconcept.com/#
 
-    static Country fromStringToCountry(String json){
+     public  Country fromStringToCountry(String json){
         Country thisCountry = new Country();
         JSONArray rootJsonArray = null;
 
         try {
+
+            // API returns in format: [{
+            // So, get JSonrray, then jsonObject
             rootJsonArray = new JSONArray(json);
             JSONObject rootJsonObject = rootJsonArray.getJSONObject(0);
 
+            //Official Name & Common Name
             JSONObject nameJsonObject = rootJsonObject.getJSONObject("name");
             thisCountry.setOfficialName(nameJsonObject.getString("official"));
+            thisCountry.setCommonName(nameJsonObject.getString("common"));
 
+            // Capital City (change to parse)
             JSONArray capitalArray = rootJsonObject.getJSONArray("capital");
             thisCountry.setCapital(capitalArray.getString(0));
+
+            // Independent & UN Member
+            thisCountry.setIndependent(rootJsonObject.getBoolean("independent"));
+            thisCountry.setUnMember(rootJsonObject.getBoolean("unMember"));
+
+            // Continent & Subregion
+            thisCountry.setSubregion(rootJsonObject.getString("subregion"));
+            thisCountry.setRegion(rootJsonObject.getString("region"));
+
+            // flag (in png format)
+            JSONObject flagJsonObject = rootJsonObject.getJSONObject("flags");
+            thisCountry.setFlag(flagJsonObject.getString("png"));
+
+            //population
+            thisCountry.setPopulation(rootJsonObject.getInt("population"));
+
+            // Currency
+            thisCountry.setCurrency(
+                    getCurrenciesFromJSon(rootJsonObject.getJSONObject("currencies"))
+            );
+
+            // Official Languages
+            thisCountry.setOfficialLanguages(
+                    getLanguagesFromJSON(rootJsonObject.getJSONObject("languages"))
+            );
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -29,4 +60,57 @@ public class JsonManager {
 
         return thisCountry;
     }
+
+
+    private String getMultipleJSonObjectsToString(JSONObject currenciesJsonObject, String seperator) throws JSONException {
+        String currencyNames = "";
+        for (int i = 0; i < currenciesJsonObject.names().length(); i++) {
+
+            // Add comma & tabs unless it's the last index.
+            if (i != currenciesJsonObject.names().length()-1)
+                currencyNames += currenciesJsonObject.names().getString(i) + seperator;
+            else
+                currencyNames += currenciesJsonObject.names().getString(i);
+        }
+
+        return currencyNames;
+    }
+
+    private String getCurrenciesFromJSon(JSONObject currenciesJsonObject) throws JSONException {
+        boolean multipleCurrencies = currenciesJsonObject.names().length() > 1;
+        String currencyNames = "";
+
+        if (multipleCurrencies)
+            currencyNames = getMultipleJSonObjectsToString(currenciesJsonObject, ",\t\t");
+        else
+            currencyNames = currenciesJsonObject.names().getString(0);
+
+        return currencyNames;
+    }
+
+    private String extractMultipleLanguages(JSONObject languageJSonObject, String seperator) throws JSONException {
+        String languagesString = "";
+
+        for (int i = 0; i < languageJSonObject.names().length(); i++) {
+            // Add comma & tabs unless it's the last index.
+            if (i != languageJSonObject.names().length()-1)
+                languagesString += languageJSonObject.get(languageJSonObject.names().getString(i)) + seperator;
+            else
+                languagesString += languageJSonObject.get(languageJSonObject.names().getString(i));
+        }
+
+        return languagesString;
+    }
+
+    String getLanguagesFromJSON(JSONObject languageJsonObject) throws JSONException {
+        boolean multipleLanguages = languageJsonObject.names().length() > 1;
+        String allLanguages = "";
+        if (multipleLanguages)
+            allLanguages = extractMultipleLanguages(languageJsonObject, ", ");
+        else
+            allLanguages = (String) languageJsonObject.get(languageJsonObject.names().getString(0));
+
+        return allLanguages;
+    }
+
 }

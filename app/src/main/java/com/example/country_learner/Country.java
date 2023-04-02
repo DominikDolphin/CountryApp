@@ -5,10 +5,11 @@ public class Country {
     private String commonName;
     private String capital;
     private String officialLanguages;
-    private String continent;
+    private String region;
     private String subregion;
     private String currency;
     private String currencySymbol;
+    private String flag;
     private int population;
     private boolean isIndependent, isUnMember;
 
@@ -17,13 +18,21 @@ public class Country {
         this.commonName = "N/A";
         this.capital = "N/A";
         this.officialLanguages = "N/A";
-        this.continent = "N/A";
+        this.region = "N/A";
         this.subregion = "N/A";
         this.currency = "N/A";
         this.currencySymbol = "N/A";
         this.population = -1;
         this.isIndependent = false;
         this.isUnMember = false;
+        this.flag = "N/A";
+    }
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
     }
 
     public String getCommonName() {
@@ -42,12 +51,12 @@ public class Country {
         this.officialLanguages = officialLanguages;
     }
 
-    public String getContinent() {
-        return continent;
+    public String getRegion() {
+        return region;
     }
 
-    public void setContinent(String continent) {
-        this.continent = continent;
+    public void setRegion(String region) {
+        this.region = region;
     }
 
     public String getSubregion() {
