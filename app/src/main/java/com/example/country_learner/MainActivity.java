@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
         searchCountry = findViewById(R.id.menu_button_search_country);
         randomCountry = findViewById(R.id.menu_button_random_country);
         favourites = findViewById(R.id.menu_button_my_favourites);
-        test = findViewById(R.id.imageViewTester);
         searchCountry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Glide.with(this).load("https://flagcdn.com/w320/ca.png").into(test);
 
         randomCountry.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,9 +22,10 @@ import java.util.ArrayList;
 
 public class CountrySearchActivity extends AppCompatActivity implements NetworkingManager.NetworkingCallBackInterface{
 
-    private Button btnClear, btnSubmit;
+    private Button btnClear, btnSubmit, btnFavourite;
     private EditText countryInput;
     private NetworkingManager networkingManager;
+    private DatabaseManager databaseManager;
     private Country thisCountry;
 
     private RecyclerView recyclerView;
@@ -35,7 +37,6 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
@@ -49,10 +50,14 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         recyclerView.setLayoutFrozen(true);
         btnClear = findViewById(R.id.country_search_button_clear);
         btnSubmit = findViewById(R.id.country_search_button_submit);
+        btnFavourite = findViewById(R.id.course_search_favourite_btn);
         countryInput = findViewById(R.id.search_input);
 
         networkingManager = ((MyApp)getApplication()).networkingManager;
         networkingManager.listener = this;
+
+        databaseManager = ((MyApp)getApplication()).databaseManager;
+        DatabaseManager.getDB(this);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +72,15 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
             @Override
             public void onClick(View view) {
                 countryInput.setText("");
+            }
+        });
+
+        btnFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //DatabaseManager.getDB(getApplicationContext()).getCountryDao().insertNewCountry(thisCountry);
+
+                Toast.makeText(getApplicationContext(), "Added to favourites", Toast.LENGTH_SHORT).show();
             }
         });
 

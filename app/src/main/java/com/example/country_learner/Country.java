@@ -1,6 +1,16 @@
 package com.example.country_learner;
 
-public class Country {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
+public class Country implements Parcelable {
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
     private String officialName;
     private String commonName;
     private String capital;
@@ -27,6 +37,35 @@ public class Country {
         this.isUnMember = false;
         this.flag = "N/A";
     }
+
+    protected Country(Parcel in) {
+        uid = in.readInt();
+        officialName = in.readString();
+        commonName = in.readString();
+        capital = in.readString();
+        officialLanguages = in.readString();
+        region = in.readString();
+        subregion = in.readString();
+        currency = in.readString();
+        currencySymbol = in.readString();
+        flag = in.readString();
+        population = in.readInt();
+        isIndependent = in.readByte() != 0;
+        isUnMember = in.readByte() != 0;
+    }
+
+    public static final Creator<Country> CREATOR = new Creator<Country>() {
+        @Override
+        public Country createFromParcel(Parcel in) {
+            return new Country(in);
+        }
+
+        @Override
+        public Country[] newArray(int size) {
+            return new Country[size];
+        }
+    };
+
     public String getFlag() {
         return flag;
     }
@@ -124,4 +163,25 @@ public class Country {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeInt(uid);
+        parcel.writeString(officialName);
+        parcel.writeString(commonName);
+        parcel.writeString(capital);
+        parcel.writeString(officialLanguages);
+        parcel.writeString(region);
+        parcel.writeString(subregion);
+        parcel.writeString(currency);
+        parcel.writeString(currencySymbol);
+        parcel.writeString(flag);
+        parcel.writeInt(population);
+        parcel.writeByte((byte) (isIndependent ? 1 : 0));
+        parcel.writeByte((byte) (isUnMember ? 1 : 0));
+    }
 }
