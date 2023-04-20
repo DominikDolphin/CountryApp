@@ -43,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
         favourites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Testing Click", "worked");
+                Intent intent = new Intent(view.getContext(), FavouriteCountriesActivity.class);
+                view.getContext().startActivity(intent);
+                //Log.d("Testing Click", "worked");
             }
         });
 

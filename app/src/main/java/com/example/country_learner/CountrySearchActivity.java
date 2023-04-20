@@ -78,8 +78,9 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         btnFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //DatabaseManager.getDB(getApplicationContext()).getCountryDao().insertNewCountry(thisCountry);
 
+                databaseManager.insertNewCountry(thisCountry);
+                //finish();
                 Toast.makeText(getApplicationContext(), "Added to favourites", Toast.LENGTH_SHORT).show();
             }
         });

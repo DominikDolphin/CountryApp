@@ -4,7 +4,15 @@ import android.content.Context;
 
 import androidx.room.Room;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseManager {
+
+    interface DatabaseCallbackInterface {
+        void databaseManagerCompleteWithArraylistOfCountries(List<Country> favList);
+    }
+    DatabaseCallbackInterface listener;
     /*
     To prevent queries from blocking the UI,
     Room does not allow database access on the main thread.
@@ -22,4 +30,27 @@ public class DatabaseManager {
         }
     }
 
+    public void insertNewCountry(Country newCountry){
+        MultithreadManager.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseManager.countriesDatabase.getCountryDao().insertNewCountry(newCountry);
+            }
+        });
+    }
+
+    public void getAllFavouriteCountries(){
+        MultithreadManager.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+               List<Country> favs = DatabaseManager.countriesDatabase.getCountryDao().getAllFavouriteCountries();
+               MultithreadManager.handler.post(new Runnable() {
+                   @Override
+                   public void run() {
+                       listener.databaseManagerCompleteWithArraylistOfCountries(favs);
+                   }
+               });
+            }
+        });
+    }
 }

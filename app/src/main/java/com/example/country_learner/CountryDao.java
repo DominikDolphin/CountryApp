@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Dao
 public interface CountryDao {
@@ -14,10 +15,10 @@ public interface CountryDao {
     void insertNewCountry(Country country);
 
     @Query("select * from Country")
-    ArrayList<Country> getAllFavouriteCountries();
+    List<Country> getAllFavouriteCountries();
 
     @Query("select * from Country WHERE commonName like :text")
-    ArrayList<Country> getAllFavouriteCitiesStartWith(String text);
+    List<Country> getAllFavouriteCitiesStartWith(String text);
 
     @Delete
     void deleteCountry(Country country);

@@ -9,6 +9,14 @@ import androidx.room.PrimaryKey;
 
 @Entity
 public class Country implements Parcelable {
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
+
     @PrimaryKey(autoGenerate = true)
     private int uid;
     private String officialName;

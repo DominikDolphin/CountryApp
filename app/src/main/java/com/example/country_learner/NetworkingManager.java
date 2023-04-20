@@ -21,9 +21,6 @@ public class NetworkingManager {
 
     NetworkingCallBackInterface listener;
 
-    ExecutorService executorService = Executors.newFixedThreadPool(4);
-    Handler handler = new Handler(Looper.getMainLooper());
-
     //Country url
     String CountryAPI = "https://restcountries.com/v3.1/name/";
 
@@ -32,7 +29,7 @@ public class NetworkingManager {
     }
 
     private void getDataFromURL(String fromURL){
-        executorService.execute(new Runnable() {
+        MultithreadManager.executorService.execute(new Runnable() {
             @Override
             public void run() {
 
@@ -56,7 +53,7 @@ public class NetworkingManager {
                     }
                     //Log.d("countryStream", jsonString);
                     final String json = jsonString;
-                    handler.post(new Runnable() {
+                    MultithreadManager.handler.post(new Runnable() {
                         @Override
                         public void run() {
                             // the code here will run in main thread (UI/Activities)
