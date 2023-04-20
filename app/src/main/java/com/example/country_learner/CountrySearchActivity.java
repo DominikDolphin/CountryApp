@@ -9,9 +9,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -19,6 +23,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CountrySearchActivity extends AppCompatActivity implements NetworkingManager.NetworkingCallBackInterface{
 
@@ -31,6 +36,32 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu,menu);
+        MenuItem searchViewmenue = menu.findItem(R.id.searchbar);
+        SearchView searchView = (SearchView) searchViewmenue.getActionView();
+//        return super.onCreateOptionsMenu(menu);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                networkingManager.getCountry(String.valueOf(query));
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.length() >= 3){
+                    networkingManager.getCountrySimpleInfoForRecycleView(String.valueOf(newText));
+                }
+
+                return false;
+            }
+        });
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,49 +73,12 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        if (thisCountry == null){
-//            thisCountry = new Country();
-//
-//        }
-
-        recyclerView.setLayoutFrozen(true);
-        btnClear = findViewById(R.id.country_search_button_clear);
-        btnSubmit = findViewById(R.id.country_search_button_submit);
-        btnFavourite = findViewById(R.id.course_search_favourite_btn);
-        countryInput = findViewById(R.id.search_input);
 
         networkingManager = ((MyApp)getApplication()).networkingManager;
         networkingManager.listener = this;
 
         databaseManager = ((MyApp)getApplication()).databaseManager;
         DatabaseManager.getDB(this);
-
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Submit button", "Clicked");
-
-                networkingManager.getCountry(String.valueOf(countryInput.getText()));
-            }
-        });
-
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                countryInput.setText("");
-            }
-        });
-
-        btnFavourite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                databaseManager.insertNewCountry(thisCountry);
-                //finish();
-                Toast.makeText(getApplicationContext(), "Added to favourites", Toast.LENGTH_SHORT).show();
-            }
-        });
-
 
     }
 
@@ -93,10 +87,10 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
     public void networkingManagerCompleteWithJSonString(String jsonString) {
         //parse json string
         JsonManager jsonManager = new JsonManager();
-        thisCountry = jsonManager.fromStringToCountry(jsonString);
 
-        //Add View to page
-        adapter = new CountryAdapter(thisCountry, this);
+        ArrayList<Country> countryList = jsonManager.fromStringToCountriesList(jsonString);
+
+        adapter = new CountryRecycleAdapter(countryList,this);
         recyclerView.setAdapter(adapter);
 
 

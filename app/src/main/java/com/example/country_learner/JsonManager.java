@@ -4,10 +4,41 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JsonManager {
 
     //Sample data: https://restcountries.com/v3.1/name/canada
     //Visualizer: https://jsonformatter.curiousconcept.com/#
+
+    //This is used for the basic recycleview preview of  country.
+    public ArrayList<Country> fromStringToCountriesList(String json){
+        ArrayList<Country> list = new ArrayList<>();
+        JSONArray rootJsonArray = null;
+        try {
+            rootJsonArray = new JSONArray(json);
+            for (int i = 0; i < rootJsonArray.length(); i++){
+                //list.add(new Country());
+                Country thisCountry = new Country();
+                JSONObject dataObject = rootJsonArray.getJSONObject(i);
+
+                JSONObject nameJsonObject = dataObject.getJSONObject("name");
+                thisCountry.setOfficialName(nameJsonObject.getString("official"));
+                thisCountry.setCommonName(nameJsonObject.getString("common"));
+//
+//                // flag (in png format)
+                JSONObject flagJsonObject = dataObject.getJSONObject("flags");
+                thisCountry.setFlag(flagJsonObject.getString("png"));
+//
+                list.add(thisCountry);
+            }
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
 
      public  Country fromStringToCountry(String json){
         Country thisCountry = new Country();

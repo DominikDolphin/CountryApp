@@ -21,11 +21,19 @@ public class NetworkingManager {
 
     NetworkingCallBackInterface listener;
 
-    //Country url
-    String CountryAPI = "https://restcountries.com/v3.1/name/";
+    String CountryAPIstart = "https://restcountries.com/v3.1/name/";
 
+    // Gets all the info we track.
     void getCountry(String countryName) {
-        getDataFromURL(CountryAPI + countryName);
+        String CountryAPIend = "?fields=name,capital,currencies,independent,unMember,region,subregion,languages,flags,population";
+        getDataFromURL(CountryAPIstart + countryName + CountryAPIend);
+    }
+
+    // We dont need to get all the information when searching name.
+    // this only gets the essential fields - saving a lot of ressources.
+    void getCountrySimpleInfoForRecycleView(String countryName){
+        String CountryAPIend = "?fields=name,flags";
+        getDataFromURL(CountryAPIstart + countryName + CountryAPIend);
     }
 
     private void getDataFromURL(String fromURL){
