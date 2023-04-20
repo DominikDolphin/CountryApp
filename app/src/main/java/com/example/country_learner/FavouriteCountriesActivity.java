@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class FavouriteCountriesActivity extends AppCompatActivity implements Dat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_countries);
-
+        setTitle("My Favourites");
         list = findViewById(R.id.favCoutnriesRecylceView);
         adapter = new CountryRecycleAdapter(countryArray, this);
         adapter.listener = this;
@@ -45,6 +46,11 @@ public class FavouriteCountriesActivity extends AppCompatActivity implements Dat
 
     @Override
     public void onCountryClicked(Country selectedCountry) {
+
         //go to country show activity ( to be implemented)
+        Intent intent = new Intent(this,CountryDetailsActivity.class);
+        intent.putExtra("country",selectedCountry);
+        startActivity(intent);
+
     }
 }

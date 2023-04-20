@@ -16,10 +16,20 @@
         android:theme="@style/Theme.Country_Learner"
         tools:targetApi="31">
         <activity
-            android:name=".FavouriteCountriesActivity"
+            android:name=".CountryDetailsActivity"
+
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".FavouriteCountriesActivity"
+            android:parentActivityName=".MainActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+
                 android:value="" />
         </activity>
         <activity
