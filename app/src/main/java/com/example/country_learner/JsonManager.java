@@ -30,6 +30,28 @@ public class JsonManager {
 //                // flag (in png format)
                 JSONObject flagJsonObject = dataObject.getJSONObject("flags");
                 thisCountry.setFlag(flagJsonObject.getString("png"));
+
+                // Independent & UN Member
+                thisCountry.setIndependent(dataObject.getBoolean("independent"));
+                thisCountry.setUnMember(dataObject.getBoolean("unMember"));
+
+                // Continent & Subregion
+                thisCountry.setSubregion(dataObject.getString("subregion"));
+                thisCountry.setRegion(dataObject.getString("region"));
+
+
+                //population
+                thisCountry.setPopulation(dataObject.getInt("population"));
+
+                // Currency
+                thisCountry.setCurrency(
+                        getCurrenciesFromJSon(dataObject.getJSONObject("currencies"))
+                );
+
+                // Official Languages
+                thisCountry.setOfficialLanguages(
+                        getLanguagesFromJSON(dataObject.getJSONObject("languages"))
+                );
 //
                 list.add(thisCountry);
             }
@@ -40,7 +62,7 @@ public class JsonManager {
         return list;
     }
 
-     public  Country fromStringToCountry(String json){
+     public Country fromStringToCountry(String json){
         Country thisCountry = new Country();
         JSONArray rootJsonArray = null;
 

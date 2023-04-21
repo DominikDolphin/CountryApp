@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -25,7 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CountrySearchActivity extends AppCompatActivity implements NetworkingManager.NetworkingCallBackInterface{
+public class CountrySearchActivity extends AppCompatActivity implements NetworkingManager.NetworkingCallBackInterface, CountryRecycleAdapter.CountryClickListener{
 
     private Button btnClear, btnSubmit, btnFavourite;
     private EditText countryInput;
@@ -33,8 +34,8 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
     private DatabaseManager databaseManager;
     private Country thisCountry;
 
+    private CountryRecycleAdapter adapter;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,6 +44,7 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         MenuItem searchViewmenue = menu.findItem(R.id.searchbar);
         SearchView searchView = (SearchView) searchViewmenue.getActionView();
 //        return super.onCreateOptionsMenu(menu);
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -55,6 +57,7 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
             public boolean onQueryTextChange(String newText) {
                 if (newText.length() >= 3){
                     networkingManager.getCountrySimpleInfoForRecycleView(String.valueOf(newText));
+                   // networkingManager.getCountry(String.valueOf(newText));
                 }
 
                 return false;
@@ -69,9 +72,10 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         setContentView(R.layout.activity_country_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
 
         networkingManager = ((MyApp)getApplication()).networkingManager;
@@ -79,6 +83,8 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
 
         databaseManager = ((MyApp)getApplication()).databaseManager;
         DatabaseManager.getDB(this);
+
+
 
     }
 
@@ -90,11 +96,34 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
 
         ArrayList<Country> countryList = jsonManager.fromStringToCountriesList(jsonString);
 
-        adapter = new CountryRecycleAdapter(countryList,this);
-        recyclerView.setAdapter(adapter);
+//        adapter = new CountryRecycleAdapter(countryList,this);
+//        recyclerView.setAdapter(adapter);
 
+
+        adapter = new CountryRecycleAdapter(countryList, this);
+        adapter.listener = this;
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
 
     }
 
+    @Override
+    public void networkingManagerSingleCountryWithJSonString(String jsonString) {
+        JsonManager jsonManager = new JsonManager();
+        //Country m_selectedCountry = jsonManager.fromStringToCountry(jsonString);
+    }
 
+    @Override
+    public void onCountryClicked(Country selectedCountry) {
+        Intent intent = new Intent(this,CountryDetailsActivity.class);
+
+        //networkingManager.getCountry(String.valueOf(selectedCountry.getOfficialName()));
+        JsonManager jsonManager = new JsonManager();
+        Country test = jsonManager.fromStringToCountry(selectedCountry.getCommonName());
+        Log.d("THE LOGGERS:", selectedCountry.getCommonName());
+        Log.d("THE LOGGERS2:", selectedCountry.getCapital());
+        intent.putExtra("country",selectedCountry);
+        startActivity(intent);
+    }
 }

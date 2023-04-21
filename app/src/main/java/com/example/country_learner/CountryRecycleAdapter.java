@@ -1,6 +1,7 @@
 package com.example.country_learner;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class CountryRecycleAdapter  extends RecyclerView.Adapter<CountryRecycleA
         Country thisCountry = countries.get(position);
         holder.countryName.setText(thisCountry.getOfficialName());
         holder.countryCommonName.setText("Common name: " + thisCountry.getCommonName());
+        Log.d("Dude", thisCountry.getRegion());
 
         //Flag needs to fetch from internet
         Glide.with(context).load(thisCountry.getFlag()).into(holder.flagView);
@@ -59,6 +61,7 @@ public class CountryRecycleAdapter  extends RecyclerView.Adapter<CountryRecycleA
 
         public TextView countryName;
         public TextView countryCommonName;
+
 
         public ImageView flagView;
 

@@ -17,6 +17,7 @@ public class NetworkingManager {
 
     interface NetworkingCallBackInterface{
         void networkingManagerCompleteWithJSonString(String jsonString);
+        void networkingManagerSingleCountryWithJSonString(String jsonString);
     }
 
     NetworkingCallBackInterface listener;
@@ -32,7 +33,9 @@ public class NetworkingManager {
     // We dont need to get all the information when searching name.
     // this only gets the essential fields - saving a lot of ressources.
     void getCountrySimpleInfoForRecycleView(String countryName){
-        String CountryAPIend = "?fields=name,flags";
+//        String CountryAPIend = "?fields=name,flags";
+
+        String CountryAPIend = "?fields=name,capital,currencies,independent,unMember,region,subregion,languages,flags,population";
         getDataFromURL(CountryAPIstart + countryName + CountryAPIend);
     }
 
