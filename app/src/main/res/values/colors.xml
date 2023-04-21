@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="button_clear">#EC0F0F</color>
     <color name="button_submit">#24AC05</color>
+    <color name="button_add_to_favourites">#E9C94D</color>
 </resources>

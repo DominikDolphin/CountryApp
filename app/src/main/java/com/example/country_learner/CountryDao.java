@@ -20,8 +20,6 @@ public interface CountryDao {
     @Query("select * from Country WHERE commonName like :text")
     List<Country> getAllFavouriteCitiesStartWith(String text);
 
-
-
     @Delete
     void deleteCountry(Country country);
 }

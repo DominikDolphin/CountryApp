@@ -36,10 +36,11 @@
         android:id="@+id/menu_button_search_country"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="108dp"
         android:text="@string/main_activity_search_country"
-        app:layout_constraintBottom_toTopOf="@+id/menu_button_random_country"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
@@ -47,31 +48,18 @@
         app:layout_constraintWidth_percent="0.5" />
 
     <Button
-        android:id="@+id/menu_button_random_country"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="@string/main_activity_random_country"
-        app:layout_constraintBottom_toTopOf="@+id/menu_button_my_favourites"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.15"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_button_search_country"
-        app:layout_constraintVertical_weight="1"
-        app:layout_constraintWidth_percent="0.5" />
-
-    <Button
         android:id="@+id/menu_button_my_favourites"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="252dp"
         android:text="@string/main_activity_my_favourites"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/menu_button_random_country"
+        app:layout_constraintTop_toBottomOf="@+id/menu_button_search_country"
         app:layout_constraintVertical_weight="1"
         app:layout_constraintWidth_percent="0.5" />
 

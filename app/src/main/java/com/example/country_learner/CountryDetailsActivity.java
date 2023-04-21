@@ -3,24 +3,31 @@ package com.example.country_learner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 import java.text.NumberFormat;
+import java.util.List;
 import java.util.Locale;
 
-public class CountryDetailsActivity extends AppCompatActivity {
+public class CountryDetailsActivity extends AppCompatActivity implements DatabaseManager.DatabaseCallbackInterface {
     public TextView countryName, commonName, capital, languages,
             region, subregion, population, currency, symbol, independent, unMember;
     public ImageView flagView;
     public Button favouriteButton;
     public Country country;
+    DatabaseManager databaseManager;
+    String toastMessage;
+    boolean thisCountryIsFavourited;
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -36,6 +43,10 @@ public class CountryDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_details);
 
+        databaseManager = ((MyApp)getApplication()).databaseManager;
+        DatabaseManager.getDB(this);
+        databaseManager.listener = this;
+
         //Because this Activity will be accessed from different Activities,
         // we add the "Back" button prgrammatically onCreate.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -47,13 +58,35 @@ public class CountryDetailsActivity extends AppCompatActivity {
         initiateVariables();
         initialSetText();
 
+        if (thisCountryIsFavourited) {
+            favouriteButton.setText("ALALALAL");
+        }
+
         favouriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                if (thisCountryIsFavourited) {
+//                    databaseManager.deleteCountryFromFavourite(country);
+//                    toastMessage = "Removed from favourites";
+                    handleDeleteFromFavourite();
+                } else {
+                    handleInsertToFavourite();
+//                    databaseManager.insertNewCountry(country);
+//                    toastMessage = "Added to favourites";
+                }
+                Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
             }
         });
 
+    }
+
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        databaseManager.getAllFavouriteCountries();
     }
     private void initiateVariables(){
         countryName = findViewById(R.id.view_countryName);
@@ -69,6 +102,8 @@ public class CountryDetailsActivity extends AppCompatActivity {
         unMember = findViewById(R.id.view_unMember);
         flagView = findViewById(R.id.imageView2);
         favouriteButton = findViewById(R.id.favButton);
+        thisCountryIsFavourited = false;
+        toastMessage = "";
     }
 
     private void initialSetText(){
@@ -94,5 +129,34 @@ public class CountryDetailsActivity extends AppCompatActivity {
 
         //Fav button
 
+    }
+
+    void handleDeleteFromFavourite(){
+        databaseManager.deleteCountryFromFavourite(country);
+        toastMessage = "Removed from favourites";
+
+        favouriteButton.setText("Add to favourites");
+        favouriteButton.setBackgroundColor(getResources().getColor(R.color.button_add_to_favourites));
+    }
+    void handleInsertToFavourite(){
+        databaseManager.insertNewCountry(country);
+        toastMessage = "Added to favourites";
+
+        favouriteButton.setText("Remove from favourites");
+        favouriteButton.setBackgroundColor(getResources().getColor(R.color.button_clear));
+    }
+    @Override
+    public void databaseManagerCompleteWithArraylistOfCountries(List<Country> favList) {
+
+        //Checks to see if this country is already part of the user's favourite list.
+        for (Country c : favList){
+            if (c.getOfficialName().equals(country.getOfficialName())){
+                thisCountryIsFavourited = true;
+                favouriteButton.setText("Remove from favourites");
+                favouriteButton.setBackgroundColor(getResources().getColor(R.color.button_clear));
+//                databaseManager.deleteCountryFromFavourite(country);
+                return;
+            }
+        }
     }
 }

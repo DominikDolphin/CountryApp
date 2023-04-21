@@ -1,5 +1,6 @@
 package com.example.country_learner;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +24,7 @@ public class FavouriteCountriesActivity extends AppCompatActivity implements Dat
         list = findViewById(R.id.favCoutnriesRecylceView);
         adapter = new CountryRecycleAdapter(countryArray, this);
         adapter.listener = this;
+        adapter.notifyDataSetChanged();
 
         DatabaseManager.getDB(this);
         databaseManager = ((MyApp)getApplication()).databaseManager;
@@ -33,10 +35,26 @@ public class FavouriteCountriesActivity extends AppCompatActivity implements Dat
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onRestart() {
+        adapter.notifyDataSetChanged();
+        super.onRestart();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
         databaseManager.getAllFavouriteCountries();
         adapter.listener = this;
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
+        databaseManager.getAllFavouriteCountries();
+        adapter.listener = this;
+        adapter.notifyDataSetChanged();
     }
     @Override
     public void databaseManagerCompleteWithArraylistOfCountries(List<Country> favList) {

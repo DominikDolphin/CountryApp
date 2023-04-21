@@ -54,4 +54,13 @@ public class DatabaseManager {
         });
     }
 
+    public void deleteCountryFromFavourite(Country toDelete){
+        MultithreadManager.executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                DatabaseManager.countriesDatabase.getCountryDao().deleteCountry(toDelete);
+            }
+        });
+    }
+
 }
