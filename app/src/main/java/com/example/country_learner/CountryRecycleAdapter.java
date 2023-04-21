@@ -16,7 +16,6 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 // Used for the favourites activity.
-
 public class CountryRecycleAdapter  extends RecyclerView.Adapter<CountryRecycleAdapter.ViewHolder>{
      ArrayList<Country> countries;
     private Context context;
@@ -44,8 +43,7 @@ public class CountryRecycleAdapter  extends RecyclerView.Adapter<CountryRecycleA
     public void onBindViewHolder(@NonNull CountryRecycleAdapter.ViewHolder holder, int position) {
         Country thisCountry = countries.get(position);
         holder.countryName.setText(thisCountry.getOfficialName());
-        holder.countryCommonName.setText("Common name: " + thisCountry.getCommonName());
-        Log.d("Dude", thisCountry.getRegion());
+        holder.countryCommonName.setText(context.getString(R.string.country_recycler_adapter_common_name) + thisCountry.getCommonName());
 
         //Flag needs to fetch from internet
         Glide.with(context).load(thisCountry.getFlag()).into(holder.flagView);

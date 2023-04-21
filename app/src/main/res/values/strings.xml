@@ -5,7 +5,19 @@
     <string name="country_search_input_hint">Search for country. Ex: Canada</string>
     <string name="country_search_title">Country Search</string>
     <string name="main_activity_search_country">Search Country</string>
-    <string name="main_activity_random_country">Random Country</string>
     <string name="main_activity_my_favourites">My Favourites</string>
     <string name="main_activity_menu_title">Menu</string>
+    <string name="facourites_activity_title">My Favourites</string>
+    <string name="country_details_commonly_known_as">Commonly known as: </string>
+    <string name="country_details_capital_city">Capital City: </string>
+    <string name="country_details_toast_message_remove_from_favourite">Removed from favourites</string>
+    <string name="country_details_favoute_button_add">Add to favourites</string>
+    <string name="country_details_favourite_button_remove">Remove from favourites</string>
+    <string name="country_details_toast_message_added_to_favourite">Added to favourites</string>
+    <string name="value_correct">✅</string>
+    <string name="value_wrong">❌</string>
+    <string name="country_recycler_adapter_common_name">Common name: </string>
+    <string name="country_search_activity_title">Country Search</string>
+    <string name="country_details_activity_title">Country Details</string>
+    <string name="main_Activity_title">Country Learner</string>
 </resources>

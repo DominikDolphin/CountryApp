@@ -19,7 +19,6 @@ public class JsonManager {
         try {
             rootJsonArray = new JSONArray(json);
             for (int i = 0; i < rootJsonArray.length(); i++){
-                //list.add(new Country());
                 Country thisCountry = new Country();
                 JSONObject dataObject = rootJsonArray.getJSONObject(i);
 
@@ -38,7 +37,6 @@ public class JsonManager {
                 // Continent & Subregion
                 thisCountry.setSubregion(dataObject.getString("subregion"));
                 thisCountry.setRegion(dataObject.getString("region"));
-
 
                 //population
                 thisCountry.setPopulation(dataObject.getInt("population"));

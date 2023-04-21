@@ -28,8 +28,6 @@ import java.util.List;
 
 public class CountrySearchActivity extends AppCompatActivity implements NetworkingManager.NetworkingCallBackInterface, CountryRecycleAdapter.CountryClickListener{
 
-    private Button btnClear, btnSubmit, btnFavourite;
-    private EditText countryInput;
     private NetworkingManager networkingManager;
     private DatabaseManager databaseManager;
     private Country thisCountry;
@@ -43,8 +41,6 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         inflater.inflate(R.menu.search_menu,menu);
         MenuItem searchViewmenue = menu.findItem(R.id.searchbar);
         SearchView searchView = (SearchView) searchViewmenue.getActionView();
-//        return super.onCreateOptionsMenu(menu);
-
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -57,9 +53,7 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
             public boolean onQueryTextChange(String newText) {
                 if (newText.length() >= 3){
                     networkingManager.getCountrySimpleInfoForRecycleView(String.valueOf(newText));
-                   // networkingManager.getCountry(String.valueOf(newText));
                 }
-
                 return false;
             }
         });
@@ -71,12 +65,10 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_search);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
+        setTitle(getString(R.string.country_search_activity_title));
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
-
 
         networkingManager = ((MyApp)getApplication()).networkingManager;
         networkingManager.listener = this;
@@ -84,10 +76,7 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         databaseManager = ((MyApp)getApplication()).databaseManager;
         DatabaseManager.getDB(this);
 
-
-
     }
-
 
     @Override
     public void networkingManagerCompleteWithJSonString(String jsonString) {
@@ -95,10 +84,6 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
         JsonManager jsonManager = new JsonManager();
 
         ArrayList<Country> countryList = jsonManager.fromStringToCountriesList(jsonString);
-
-//        adapter = new CountryRecycleAdapter(countryList,this);
-//        recyclerView.setAdapter(adapter);
-
 
         adapter = new CountryRecycleAdapter(countryList, this);
         adapter.listener = this;
@@ -110,19 +95,15 @@ public class CountrySearchActivity extends AppCompatActivity implements Networki
 
     @Override
     public void networkingManagerSingleCountryWithJSonString(String jsonString) {
-        JsonManager jsonManager = new JsonManager();
-        //Country m_selectedCountry = jsonManager.fromStringToCountry(jsonString);
     }
 
     @Override
     public void onCountryClicked(Country selectedCountry) {
         Intent intent = new Intent(this,CountryDetailsActivity.class);
 
-        //networkingManager.getCountry(String.valueOf(selectedCountry.getOfficialName()));
         JsonManager jsonManager = new JsonManager();
         Country test = jsonManager.fromStringToCountry(selectedCountry.getCommonName());
-        Log.d("THE LOGGERS:", selectedCountry.getCommonName());
-        Log.d("THE LOGGERS2:", selectedCountry.getCapital());
+
         intent.putExtra("country",selectedCountry);
         startActivity(intent);
     }

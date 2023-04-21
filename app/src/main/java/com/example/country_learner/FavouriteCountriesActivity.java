@@ -20,7 +20,7 @@ public class FavouriteCountriesActivity extends AppCompatActivity implements Dat
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favourite_countries);
-        setTitle("My Favourites");
+        setTitle(getString(R.string.facourites_activity_title));
         list = findViewById(R.id.favCoutnriesRecylceView);
         adapter = new CountryRecycleAdapter(countryArray, this);
         adapter.listener = this;

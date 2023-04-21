@@ -3,9 +3,7 @@ package com.example.country_learner;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +26,7 @@ public class CountryDetailsActivity extends AppCompatActivity implements Databas
     DatabaseManager databaseManager;
     String toastMessage;
     boolean thisCountryIsFavourited;
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -42,7 +41,7 @@ public class CountryDetailsActivity extends AppCompatActivity implements Databas
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country_details);
-
+        setTitle(getString(R.string.country_details_activity_title));
         databaseManager = ((MyApp)getApplication()).databaseManager;
         DatabaseManager.getDB(this);
         databaseManager.listener = this;
@@ -58,30 +57,19 @@ public class CountryDetailsActivity extends AppCompatActivity implements Databas
         initiateVariables();
         initialSetText();
 
-        if (thisCountryIsFavourited) {
-            favouriteButton.setText("ALALALAL");
-        }
-
         favouriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (thisCountryIsFavourited) {
-//                    databaseManager.deleteCountryFromFavourite(country);
-//                    toastMessage = "Removed from favourites";
                     handleDeleteFromFavourite();
                 } else {
                     handleInsertToFavourite();
-//                    databaseManager.insertNewCountry(country);
-//                    toastMessage = "Added to favourites";
                 }
                 Toast.makeText(getApplicationContext(), toastMessage, Toast.LENGTH_SHORT).show();
             }
         });
 
     }
-
-
 
     @Override
     protected void onResume() {
@@ -108,8 +96,8 @@ public class CountryDetailsActivity extends AppCompatActivity implements Databas
 
     private void initialSetText(){
         countryName.setText(country.getOfficialName());
-        commonName.setText("Commonly known as: " + country.getCommonName());
-        capital.setText("Capital City: " + country.getCapital());
+        commonName.setText(getString(R.string.country_details_commonly_known_as) + country.getCommonName());
+        capital.setText(getString(R.string.country_details_capital_city) + country.getCapital());
         languages.setText(country.getOfficialLanguages());
         region.setText(country.getRegion());
         subregion.setText(country.getSubregion());
@@ -121,28 +109,26 @@ public class CountryDetailsActivity extends AppCompatActivity implements Databas
 
         currency.setText(country.getCurrency());
         symbol.setText(country.getCurrencySymbol());
-        independent.setText(country.isIndependent() ? "✅" : "❌");
-        unMember.setText(country.isUnMember() ? "✅" : "❌");
+        independent.setText(country.isIndependent() ? getString(R.string.value_correct) : getString(R.string.value_wrong));
+        unMember.setText(country.isUnMember() ? getString(R.string.value_correct) : getString(R.string.value_wrong));
 
         //Flag needs to fetch from internet
         Glide.with(this).load(country.getFlag()).into(flagView);
-
-        //Fav button
 
     }
 
     void handleDeleteFromFavourite(){
         databaseManager.deleteCountryFromFavourite(country);
-        toastMessage = "Removed from favourites";
+        toastMessage = getString(R.string.country_details_toast_message_remove_from_favourite);
 
-        favouriteButton.setText("Add to favourites");
+        favouriteButton.setText(R.string.country_details_favoute_button_add);
         favouriteButton.setBackgroundColor(getResources().getColor(R.color.button_add_to_favourites));
     }
     void handleInsertToFavourite(){
         databaseManager.insertNewCountry(country);
-        toastMessage = "Added to favourites";
+        toastMessage = getString(R.string.country_details_toast_message_added_to_favourite);
 
-        favouriteButton.setText("Remove from favourites");
+        favouriteButton.setText(R.string.country_details_favourite_button_remove);
         favouriteButton.setBackgroundColor(getResources().getColor(R.color.button_clear));
     }
     @Override
@@ -152,9 +138,8 @@ public class CountryDetailsActivity extends AppCompatActivity implements Databas
         for (Country c : favList){
             if (c.getOfficialName().equals(country.getOfficialName())){
                 thisCountryIsFavourited = true;
-                favouriteButton.setText("Remove from favourites");
+                favouriteButton.setText(R.string.country_details_favourite_button_remove);
                 favouriteButton.setBackgroundColor(getResources().getColor(R.color.button_clear));
-//                databaseManager.deleteCountryFromFavourite(country);
                 return;
             }
         }
